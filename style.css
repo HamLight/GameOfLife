@@ -1,0 +1,44 @@
+table{
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+}
+tr td{
+    border: 1px solid black;
+    border-right-style:none ;
+    margin: 0;
+    font-size: large;
+    font-family: sans-serif;
+}
+#DarkBlue{
+    background-color: DarkBlue;
+}
+#MediumSlateBlue{
+    background-color: MediumSlateBlue;
+}
+#Gold{
+    background-color:Gold;
+    
+}
+#FireBrick{
+    background-color:FireBrick;
+}
+#black{
+    background-color: black;
+}
+#white{
+    background-color:white;
+}
+
+#first{
+    background-color: black;
+    color: white;
+}
+.second{
+    background-color: rgb(180, 180, 180);
+    
+}
+.third{
+    background-color: rgb(112, 112, 112);
+    color: rgb(246, 233, 246);
+}
