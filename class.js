@@ -1,23 +1,9 @@
 
-class Materia {
+class Creature{
     constructor(x, y) {
         this.x = x;
         this.y = y;
-
-        this.multiply = 0;
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
-
-
     chooseCell(ch) {
         var found = [];
         for (let i in this.directions) {
@@ -30,6 +16,22 @@ class Materia {
             }
         }
         return found;
+    }
+}
+class Materia extends Creature {
+    constructor(x,y) {
+    super(x,y)
+        this.multiply = 0;
+        this.directions = [
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
+            [this.x - 1, this.y + 1],
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1]
+        ];
     }
 
 
@@ -47,10 +49,9 @@ class Materia {
         }
     }
 }
-class Star {
+class Star extends Creature {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x,y);
         this.directions = [];
         this.energy = 8;
     }
@@ -71,17 +72,7 @@ class Star {
 
     chooseCell(ch) {
         this.getNewCoordinates()
-        var found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0]
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == ch) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.chooseCell(ch)
     }
 
     move() {
@@ -145,10 +136,10 @@ class Star {
         }
     }
 }
-class Meteorite {
+class Meteorite extends Creature{
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        console.log(this.y);
+        super(x,y)
         this.directions = [];
         this.energy = 12;
     }
@@ -166,19 +157,8 @@ class Meteorite {
     }
     chooseCell(ch) {
         this.getNewCoordinates()
-        var found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0]
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == ch) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.chooseCell(ch)
     }
-
     move() {
         this.energy--;
         let emptyCell1 = this.chooseCell(1)
@@ -253,10 +233,9 @@ class Meteorite {
 
     }
 }
-class Hole{
+class Hole extends Creature{
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x,y)
         this.energy = 0;
         this.type = "black"
     
@@ -271,20 +250,7 @@ class Hole{
             [this.x + 1, this.y + 1]
         ]
     }
-    chooseCell(ch) {
-        var found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0]
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
 
-                if (matrix[y][x] == ch) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
     disapear() {
         let xMat
         let yMat
