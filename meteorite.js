@@ -1,5 +1,5 @@
-var Creature = require("./creature")
-class Meteorite extends Creature{
+let Creature = require("./creature")
+module.exports = class Meteorite extends Creature{
     constructor(x, y) {
         super(x,y)
         this.directions = [];

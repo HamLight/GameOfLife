@@ -1,5 +1,5 @@
-var Creature = require("./creature")
-class Hole extends Creature{
+let Creature = require("./creature")
+module.exports = class Hole extends Creature{
     constructor(x, y) {
         super(x,y)
         this.energy = 0;
