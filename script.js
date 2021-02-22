@@ -1,5 +1,5 @@
 var side = 10;
-
+let socket = io()
 
 function nkarel(matrix) {
     for (let y = 0; y < matrix.length; y++) {

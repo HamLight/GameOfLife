@@ -3,10 +3,6 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require("fs");
-const Hole = require('./hole');
-const Materia = require('./materia');
-const Meteorite = require('./meteorite');
-const Star = require('./star');
 
 app.use(express.static("."));
 
@@ -61,10 +57,10 @@ matrixGen(50, 50, 1000, 400, 30, 10);
 io.sockets.emit('send matrix', matrix)
 
 
-var materiaArr = [];
-var starArr = [];
-var meteoriteArr = []
-var holeArr = [];
+materiaArr = [];
+starArr = [];
+meteoriteArr = []
+holeArr = [];
 
 Materia = require("./materia")
 Star = require("./star")
