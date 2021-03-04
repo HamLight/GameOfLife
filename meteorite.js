@@ -24,11 +24,10 @@ module.exports = class Meteorite extends Creature{
     move() {
         this.energy--;
         let emptyCell1 = this.chooseCell(1)
-        let emptyCell0 = this.chooseCell(0) 
+        let emptyCell0 = this.chooseCell(0)
+        let emptyCell = emptyCell0.concat(emptyCell1)
 
-        let arr = emptyCell0.concat(emptyCell1)
-
-        let newCell = arr[Math.floor(Math.random() * arr.length)];
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
         if (newCell && this.energy >= 0) {
             if (newCell == 0) {
                 let newX = newCell[0];

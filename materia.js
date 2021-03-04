@@ -4,6 +4,7 @@ module.exports = class Materia extends Creature {
     super(x,y)
         this.multiply = 0;
         this.directions = [
+            [this.x, this.y],
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],
             [this.x + 1, this.y - 1],
@@ -14,7 +15,6 @@ module.exports = class Materia extends Creature {
             [this.x + 1, this.y + 1]
         ];
     }
-
 
     mul() {
         this.multiply++

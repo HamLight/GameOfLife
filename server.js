@@ -50,9 +50,20 @@ function matrixGen(matY, matX, materia, star, meteorite, hole) {
             matrix[y][x] = 4;
         }
     }
+    var sunX = 25
+    var sunY = 25
+    matrix[sunY][sunX] = 7;
+    matrix[sunY - 1][sunX - 1] = 7;
+    matrix[sunY][sunX - 1] = 7;
+    matrix[sunY + 1][sunX - 1] = 7;
+    matrix[sunY - 1][sunX] = 7;
+    matrix[sunY + 1][sunX] = 7;
+    matrix[sunY - 1][sunX + 1] = 7;
+    matrix[sunY][sunX + 1] = 7;
+    matrix[sunY + 1][sunX + 1] = 7;
 }
 
-matrixGen(50, 50, 1000, 400, 30, 10);
+matrixGen(50, 50, 1000, 100, 30, 10);
 
 io.sockets.emit('send matrix', matrix)
 
@@ -61,11 +72,13 @@ materiaArr = [];
 starArr = [];
 meteoriteArr = []
 holeArr = [];
+sun = 0
 
 Materia = require("./materia")
 Star = require("./star")
 Meteorite = require("./meteorite")
 Hole = require("./hole")
+Sun = require("./sun")
 
 function createObject(matrix) {
     for (var y = 0; y < matrix.length; y++) {
@@ -82,7 +95,9 @@ function createObject(matrix) {
             } else if(matrix[y][x] == 4){
                 var hole = new Hole(x,y);
                 holeArr.push(hole);
-            } 
+            } else if(matrix[y][x] == 7){
+                sun = new Sun(x,y)
+            }
         }
     }
 
@@ -108,8 +123,14 @@ function game() {
     io.sockets.emit('send matrix', matrix) 
 }
 
-setInterval(game, 1000)
+function sunActivate(){
+    sun.sunActivate()
+}
+
+
+setInterval(game, 100)
 
 io.on('connection', function (socket) {
     createObject(matrix)
+    socket.on("sunActivate", sunActivate)
 })

@@ -1,6 +1,12 @@
 var side = 10;
 let socket = io()
 
+function setup() {
+    createCanvas(50 * side, 50 * side);
+    background('#acacac'); 
+    noStroke();
+}
+
 function nkarel(matrix) {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix.length; x++) {
@@ -25,15 +31,24 @@ function nkarel(matrix) {
             else if (matrix[y][x] == 6) {
                 fill("Moccasin");
             }
+            else if (matrix[y][x] == 7) {
+                fill("Orange");
+            }
+            else if (matrix[y][x] == 8) {
+                fill("DarkOrange");
+            }
             rect(x * side, y * side, side, side);
  
         }
     }
 }
+function sunActivate(){
+    socket.emit("sunActivate")
+}
 
 setInterval(
     function () {
     socket.on('send matrix', nkarel)
-    },1000
+    },100
 )
 
