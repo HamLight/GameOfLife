@@ -62,8 +62,6 @@ module.exports = class Star extends Creature {
             let newY = newCell[1]; 
             matrix[newY][newX] = 2
             matrix[this.y][this.x] = 0;
-
-
             for (let i = 0; i < materiaArr.length; i++) {
                 if (materiaArr[i].x == this.x && materiaArr[i].y == this.y) {
                     materiaArr.splice(i, 1);

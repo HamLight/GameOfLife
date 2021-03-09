@@ -22,7 +22,6 @@ function matrixGen(matY, matX, materia, star, meteorite, hole) {
     }
 
     for (let i = 0; i < materia; i++) {
-
         var y = Math.floor(Math.random() * matY)
         var x = Math.floor(Math.random() * matX)
         if (matrix[y][x] == 0) {
@@ -78,7 +77,7 @@ Materia = require("./materia")
 Star = require("./star")
 Meteorite = require("./meteorite")
 Hole = require("./hole")
-Sun = require("./sun")
+Sun = require("./sun") 
 
 function createObject(matrix) {
     for (var y = 0; y < matrix.length; y++) {
@@ -86,22 +85,23 @@ function createObject(matrix) {
             if (matrix[y][x] == 1) {
                 var mt = new Materia(x, y);
                 materiaArr.push(mt);
-            } else if (matrix[y][x] == 2) {
+            } 
+            else if (matrix[y][x] == 2) {
                 var st = new Star(x, y);
                 starArr.push(st);
-            } else if(matrix[y][x] == 3){
+            } 
+            else if(matrix[y][x] == 3){
                 var met = new Meteorite(x,y);
                 meteoriteArr.push(met);
-            } else if(matrix[y][x] == 4){
+            } 
+            else if(matrix[y][x] == 4){
                 var hole = new Hole(x,y);
                 holeArr.push(hole);
-            } else if(matrix[y][x] == 7){
-                sun = new Sun(x,y)
-            }
+            }     
         }
     }
-
-    io.sockets.emit('send matrix', matrix)   
+    sun = new Sun(25,25);
+    io.sockets.emit('send matrix', matrix)
 }
 
 function game() {
@@ -116,7 +116,6 @@ function game() {
         meteoriteArr[i].mul();
         meteoriteArr[i].eat();
     }
-
     for (let i = 0; i < holeArr.length; i++) {
         holeArr[i].disapear();
     }
@@ -127,10 +126,26 @@ function sunActivate(){
     sun.sunActivate()
 }
 
+function sunBurn(){
+    sun.sunBurn()
+}
 
 setInterval(game, 100)
 
 io.on('connection', function (socket) {
     createObject(matrix)
     socket.on("sunActivate", sunActivate)
+    socket.on("sunBurn", sunBurn)
 })
+
+var statistics = {};
+
+setInterval(function() {
+    statistics.materia = materiaArr.length;
+    statistics.star = starArr.length;
+    statistics.meteorite = meteoriteArr.length;
+    statistics.hole = holeArr.length;
+    fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
+        console.log("send")
+    })
+},1000)

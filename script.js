@@ -38,12 +38,16 @@ function nkarel(matrix) {
                 fill("DarkOrange");
             }
             rect(x * side, y * side, side, side);
- 
         }
     }
 }
+
 function sunActivate(){
     socket.emit("sunActivate")
+}
+
+function sunBurn(){
+    socket.emit("sunBurn")
 }
 
 setInterval(

@@ -1,36 +1,36 @@
 let Creature = require("./creature")
 module.exports = class Hole extends Creature{
-        constructor(x, y) {
-            super(x,y)
-            this.energy = 0;
-            this.type = "black"
-        
-            this.directions = [
-                [this.x - 1, this.y - 1],
-                [this.x, this.y - 1],
-                [this.x + 1, this.y - 1],
-                [this.x - 1, this.y],
-                [this.x + 1, this.y],
-                [this.x - 1, this.y + 1],
-                [this.x, this.y + 1],
-                [this.x + 1, this.y + 1]
-            ]
-        }
+    constructor(x, y) {
+        super(x,y)
+        this.energy = 0;
+        this.type = "black"
+    
+        this.directions = [
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
+            [this.x - 1, this.y + 1],
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1]
+        ]
+    }
 
-        disapear() {
-            let xMat
-            let yMat
-            if(this.energy >= 30 && this.type == "black"){
-                this.type = "white"
-            }      
-            else if(this.energy <= 0 && this.type=="white"){
-                this.type = "black"
-            }
-            if(this.type == "black"){
-                
-                for (let i in this.directions) {
-                    xMat = this.directions[i][0]
-                    yMat = this.directions[i][1]
+    disapear() {
+        let xMat
+        let yMat
+        if(this.energy >= 30 && this.type == "black"){
+            this.type = "white"
+        }      
+        else if(this.energy <= 0 && this.type=="white"){
+            this.type = "black"
+        }
+        if(this.type == "black"){
+            
+            for (let i in this.directions) {
+                xMat = this.directions[i][0]
+                yMat = this.directions[i][1]
 
                 if (xMat >= 0 && xMat < matrix[0].length && yMat >= 0 && yMat < matrix.length) {
                     if(matrix[yMat][xMat]==1){

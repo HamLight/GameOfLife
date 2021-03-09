@@ -36,7 +36,8 @@ module.exports = class Meteorite extends Creature{
                 matrix[this.y][this.x] = 0;
                 this.x = newX
                 this.y = newY
-            } else if (newCell == 1) {
+            } 
+            else if (newCell == 1) {
                 let newX = newCell[0];
                 let newY = newCell[1];
                 matrix[newY][newX] = 3
